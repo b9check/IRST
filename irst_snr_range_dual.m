@@ -20,13 +20,13 @@ scenario = tern(isHumid,'Humid','Std');
 
 % ---------- base parameter struct ----------
 p              = irst_params_default();
-p.ATM_SCENARIO = scenario;
-p.OP_MODE      = 'hybrid';     % apples-to-apples physics
-p.fixed_tint_s = 100e-6;      % 100 µs integration
 Re = p.Re_km;                 % Earth radius (km)
 rs = Re + p.z_sensor_km;      % HW sensor radius
 rt = Re + p.z_target_km;      % target radius
 rsat = Re + p.z_sbir_km;      % satellite radius
+speed = p.Mach_tgt;
+alt = p.z_target_km;
+time_int = p.fixed_tint_s;
 
 % ---------- allocate result arrays ----------
 n        = numel(range_km);
@@ -57,11 +57,13 @@ end
 figure; hold on; grid on;
 semilogy(range_km, SNR_HW,  '-', 'LineWidth',1.6);
 semilogy(range_km, SNR_SB, '--', 'LineWidth',1.6);
+yline(10, 'k--', 'LineWidth', 1.4, 'Label', 'Detection Threshold (SNR=10)', ...
+    'LabelHorizontalAlignment','left', 'LabelVerticalAlignment','top');
 set(gca,'YScale','log')   % <-- keep axis in log space
-xlabel('HyperWatch slant range (km)');
+xlabel('Slant range (km)');
 ylabel('SNR per Integration');
-title(sprintf('SNR vs Range — %s atmosphere, t_{int}=100 \\mus',scenario));
-legend({'HyperWatch','SBIR'},'Location','best');
+% title(sprintf('SNR vs Slant Range — Mach %.0f Missile at %.0f km Altitude (Neutrino SX8, t_{int}=%.2f ms)', speed, alt, time_int*1000));
+legend({'HyperWatch','LEO Satellite'},'Location','best');
 end
 
 % ---------- tiny ternary helper ----------
