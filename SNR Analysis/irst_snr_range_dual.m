@@ -62,7 +62,7 @@ yline(10, 'k--', 'LineWidth', 1.4, 'Label', 'Detection Threshold (SNR=10)', ...
 set(gca,'YScale','log')   % <-- keep axis in log space
 xlabel('Slant range (km)');
 ylabel('SNR per Integration');
-% title(sprintf('SNR vs Slant Range — Mach %.0f Missile at %.0f km Altitude (Neutrino SX8, t_{int}=%.2f ms)', speed, alt, time_int*1000));
+title(sprintf('SNR vs Slant Range — Mach %.0f Missile at %.0f km Altitude (Neutrino SX8, t_{int}=%.2f ms)', speed, alt, time_int*1000));
 legend({'HyperWatch','LEO Satellite'},'Location','best');
 end
 

@@ -53,7 +53,6 @@ L_bg_SBIR_W   = tau_SBIR_slant * L_bg_earth_W + L_path_SBIR_W;
 T_amb_K = ussaTemp(p.z_target_km);
 eta_surface = 0.4;   % fraction of stagnation T rise (20% typical)
 T_tgt_K = T_amb_K + eta_surface * (T_amb_K * ((1 + p.recovery*(p.gamma_air-1)/2 * p.Mach_tgt^2) - 1));
-disp(T_tgt_K)
 L_tgt_W = blackbodyRadianceBand(T_tgt_K, p.band_lo_um, p.band_hi_um, p.eps_tgt);
 
 % differential radiance (clip >=0)
